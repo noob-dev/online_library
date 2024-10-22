@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Library{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <p class="mb-0">Logged in as: <strong>{{ user.username }}</strong></p>
+        </div>
+        <form action="{% url 'logout' %}" method="post" style="display: inline">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
+    </div>
+    <div class="container my-3">
+        <form method="GET" action="{% url 'book_list' %}">
+            <input type="text" name="q" placeholder="Search books...  Or Authors..." value="{{ request.GET.q }}"><br>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+    <div class="container">
+        <h1>Library</h1>
+        <a href="{% url 'add_book' %}" class="btn btn-primary add-book">Add Book</a>
+        {% if books %}
+            <ol>
+                {% for book in books %}
+                <li>
+                    <span class="book-title"><a href="{% url 'book_detail' pk=book.id %}">{{ book.title }}</a></span>
+                    <span class="book-actions">
+                        <a href="{% url 'update_book' pk=book.id %}">Update</a>
+                        <a href="{% url 'delete_book' pk=book.id %}">Delete</a>
+                    </span>
+                </li>
+                {% endfor %}
+            </ol>
+        {% else %}
+            <p>No books available. Please add some books to the library.</p>
+        {% endif %}
+    </div>
+
+    <footer>
+        <p>Powered by <a href="https://www.linkedin.com/in/abdulla-dev/">Abdulla Abdukulov</a></p>
+    </footer>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
+{% endblock %}

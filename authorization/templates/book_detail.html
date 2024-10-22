@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ book.title }}{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1>{{ book.title }}</h1>
+        <p><strong>Description:</strong> {{ book.description }}</p>
+        <p><strong>Author:</strong> {{ book.author }}</p>
+        <p><strong>Publication Date:</strong> {{ book.published_date }}</p>
+        <a href="{% url 'book_list' %}" class="btn btn-primary back-link">Back</a>
+    </div>
+    <footer>
+        <p>Powered by <a href="https://www.linkedin.com/in/abdulla-dev/">Abdulla Abdukulov</a></p>
+    </footer>
+    <script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
+{% endblock %}

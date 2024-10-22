@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if book.id %} Update Book {% else %} Add Book {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>{% if book.id %} Update Book {% else %} Add Book {% endif %}</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_title">Title:</label>
+                {{ form.title }}
+            </div>
+            <div class="form-group">
+                <label for="id_description">Description:</label>
+                {{ form.description }}
+            </div>
+            <div class="form-group">
+                <label for="id_author">Author:</label>
+                {{ form.author }}
+            </div>
+            <div class="form-group">
+                <label for="id_published_date">Published Date:</label>
+                {{ form.published_date }}
+            </div>   
+            <button type="submit" class="btn btn-primary">
+                {% if book.id %} Update Book {% else %} Add Book {% endif %}
+            </button>
+        </form>
+    </div>
+    <footer>
+        <p>Powered by <a href="https://www.linkedin.com/in/abdulla-dev/">Abdulla Abdukulov</a></p>
+    </footer>
+    <script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
+{% endblock %}
